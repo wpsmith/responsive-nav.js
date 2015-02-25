@@ -1,8 +1,9 @@
 /*! responsive-nav.js 1.0.34
  * https://github.com/viljamis/responsive-nav.js
+ * https://github.com/wpsmith/responsive-nav.js
  * http://responsive-nav.com
  *
- * Copyright (c) 2014 @viljamis
+ * Copyright (c) 2014 @viljamis, @wp_smith
  * Available under the MIT license
  */
 
@@ -260,8 +261,8 @@
         nav.removeAttribute("style");
         nav.removeAttribute("aria-hidden");
 
-        removeEvent(window, "resize", this, false);
-        removeEvent(window, "focus", this, false);
+        removeEvent(self._getWindow(), "resize", this, false);
+        removeEvent(self._getWindow(), "focus", this, false);
         removeEvent(document.body, "touchmove", this, false);
         removeEvent(navToggle, "touchstart", this, false);
         removeEvent(navToggle, "touchend", this, false);
@@ -427,8 +428,8 @@
           self.resize();
         }, 20);
 
-        addEvent(window, "resize", this, false);
-        addEvent(window, "focus", this, false);
+        addEvent(self._getWindow(), "resize", this, false);
+        addEvent(self._getWindow(), "focus", this, false);
         addEvent(document.body, "touchmove", this, false);
         addEvent(navToggle, "touchstart", this, false);
         addEvent(navToggle, "touchend", this, false);
@@ -440,6 +441,12 @@
          * Init callback here
          */
         opts.init();
+      },
+      
+      _getWindow: function() {
+      	var workspace = document.getElementById("s4-workspace");
+      	workspace = ( 'undefined' === typeof workspace || null === workspace ) ? window : workspace;
+      	return workspace;
       },
 
       /**
